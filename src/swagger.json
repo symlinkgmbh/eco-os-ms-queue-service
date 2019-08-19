@@ -1,0 +1,154 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Simple queue service",
+    "version": "1.0.0",
+    "title": "2ndLock queue service",
+    "termsOfService": "http://2ndLock.com",
+    "contact": {
+      "email": "jens@symlink.de"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "jobs",
+      "description": "queue jobs"
+    }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/job": {
+      "post": {
+        "tags": ["jobs"],
+        "summary": "add job to queue",
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      },
+      "get": {
+        "tags": ["jobs"],
+        "summary": "get all jobs from queue",
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      }
+    },
+    "/job/id": {
+      "get": {
+        "tags": ["jobs"],
+        "summary": "get job by id",
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      },
+      "put": {
+        "tags": ["jobs"],
+        "summary": "update job by id",
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      }
+    },
+    "/job/filter/scheduled": {
+      "get": {
+        "tags": ["jobs"],
+        "summary": "get all scheduled jobs",
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      }
+    },
+    "/job/filter/processing": {
+      "get": {
+        "tags": ["jobs"],
+        "summary": "get all processing jobs",
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      }
+    },
+    "/job/filter/crashed": {
+      "get": {
+        "tags": ["jobs"],
+        "summary": "get all crashed jobs",
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      }
+    },
+    "/job/filter/finished": {
+      "get": {
+        "tags": ["jobs"],
+        "summary": "get all finished jobs",
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Failed"
+          }
+        }
+      }
+    },
+    "/heartbeat": {
+      "get": {
+        "tags": ["heartbeat"],
+        "summary": "get current heartbeat from service",
+        "description": "response with current service health",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
