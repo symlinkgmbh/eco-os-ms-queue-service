@@ -21,12 +21,8 @@ import { IJobs } from "../models";
 import { Request } from "express";
 
 export interface IQueueService {
-    addJob(req: Request): Promise<IJobs>;
-    getJob(req: Request): Promise<IJobs>;
-    updateJob(req: Request): Promise<IJobs>;
-    getAllJobs(): Promise<Array<IJobs>>;
-    getScheduledJobs(): Promise<Array<IJobs>>;
-    getProcessingJobs(): Promise<Array<IJobs>>;
-    getCrashedJobs(): Promise<Array<IJobs>>;
-    getFinishedJobs(): Promise<Array<IJobs>>;
+  addJob(req: Request): Promise<IJobs>;
+  getJob(req: Request): Promise<IJobs>;
+  updateJob(req: Request): Promise<IJobs>;
+  getAllJobs(): Promise<Array<IJobs>>;
 }

@@ -44,10 +44,6 @@ export class Jobs extends AbstractRoutes implements PkApi.IRoute {
     this.getJobs();
     this.getJob();
     this.updateJob();
-    this.getScheduledJobs();
-    this.getProcessingJobs();
-    this.getCrashedJobs();
-    this.getFinishedJobs();
   }
 
   private addJob(): void {
@@ -103,66 +99,6 @@ export class Jobs extends AbstractRoutes implements PkApi.IRoute {
         this.validatorService.validate(req.body, this.updateJobPattern);
         this.jobsController
           .updateJob(req)
-          .then((result) => {
-            res.send(result);
-          })
-          .catch((err) => {
-            next(err);
-          });
-      });
-  }
-
-  private getScheduledJobs(): void {
-    this.getApp()
-      .route("/job/filter/scheduled")
-      .get((req: Request, res: Response, next: NextFunction) => {
-        this.jobsController
-          .getScheduledJobs()
-          .then((result) => {
-            res.send(result);
-          })
-          .catch((err) => {
-            next(err);
-          });
-      });
-  }
-
-  private getProcessingJobs(): void {
-    this.getApp()
-      .route("/job/filter/processing")
-      .get((req: Request, res: Response, next: NextFunction) => {
-        this.jobsController
-          .getProcessingJobs()
-          .then((result) => {
-            res.send(result);
-          })
-          .catch((err) => {
-            next(err);
-          });
-      });
-  }
-
-  private getCrashedJobs(): void {
-    this.getApp()
-      .route("/job/filter/crashed")
-      .get((req: Request, res: Response, next: NextFunction) => {
-        this.jobsController
-          .getCrashedJobs()
-          .then((result) => {
-            res.send(result);
-          })
-          .catch((err) => {
-            next(err);
-          });
-      });
-  }
-
-  private getFinishedJobs(): void {
-    this.getApp()
-      .route("/job/filter/finished")
-      .get((req: Request, res: Response, next: NextFunction) => {
-        this.jobsController
-          .getFinishedJobs()
           .then((result) => {
             res.send(result);
           })

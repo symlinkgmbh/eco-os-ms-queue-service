@@ -22,35 +22,22 @@ import { IJobs } from "../models";
 import { IQueueService, queueServiceContainer, QUEUESERVICETYPES } from "../infrastracture";
 
 export class JobsController {
+  private queueService: IQueueService;
 
-    private queueService: IQueueService;
+  constructor() {
+    this.queueService = queueServiceContainer.get<IQueueService>(QUEUESERVICETYPES.IQueueService);
+  }
 
-    constructor() {
-        this.queueService = queueServiceContainer.get<IQueueService>(QUEUESERVICETYPES.IQueueService);
-    }
-
-    public async createJob(req: Request): Promise<IJobs> {
-       return await this.queueService.addJob(req);
-    }
-    public async getJob(req: Request): Promise<IJobs> {
-        return await this.queueService.getJob(req);
-    }
-    public async getAllJobs(): Promise<Array<IJobs>> {
-        return await this.queueService.getAllJobs();
-    }
-    public async getScheduledJobs(): Promise<Array<IJobs>> {
-        return await this.queueService.getScheduledJobs();
-    }
-    public async getProcessingJobs(): Promise<Array<IJobs>> {
-        return await this.queueService.getProcessingJobs();
-    }
-    public async getCrashedJobs(): Promise<Array<IJobs>> {
-        return await this.queueService.getCrashedJobs();
-    }
-    public async getFinishedJobs(): Promise<Array<IJobs>> {
-        return await this.queueService.getFinishedJobs();
-    }
-    public async updateJob(req: Request): Promise<IJobs> {
-        return await this.queueService.updateJob(req);
-    }
+  public async createJob(req: Request): Promise<IJobs> {
+    return await this.queueService.addJob(req);
+  }
+  public async getJob(req: Request): Promise<IJobs> {
+    return await this.queueService.getJob(req);
+  }
+  public async getAllJobs(): Promise<Array<IJobs>> {
+    return await this.queueService.getAllJobs();
+  }
+  public async updateJob(req: Request): Promise<IJobs> {
+    return await this.queueService.updateJob(req);
+  }
 }

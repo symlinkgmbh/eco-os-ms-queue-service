@@ -18,9 +18,9 @@
 
 
 import { IQueueService } from "./IQueueService";
-import { IJobs, JobStates } from "../models";
+import { IJobs } from "../models";
 import { injectRedisClient } from "@symlinkde/eco-os-pk-redis";
-import { PkRedis, MsOverride } from "@symlinkde/eco-os-pk-models";
+import { PkRedis, MsOverride, MsQueue } from "@symlinkde/eco-os-pk-models";
 import { StaticQueueUtil } from "./StaticQueueUtil";
 import { Log, LogLevel } from "@symlinkde/eco-os-pk-log";
 import { CustomRestError, apiResponseCodes } from "@symlinkde/eco-os-pk-api";
@@ -39,7 +39,7 @@ export class QueueService implements IQueueService {
         attempts: 0,
         createdAt: new Date(),
         lastStatusUpdate: new Date(),
-        status: JobStates.scheduled,
+        status: MsQueue.QueueStates.scheduled,
         id: jobId,
         job,
         failover,
@@ -79,7 +79,7 @@ export class QueueService implements IQueueService {
       const { status, trace } = req.body;
       const entry = await this.getJob(req);
 
-      if (status === JobStates.crashed || status === JobStates.error) {
+      if (status === MsQueue.QueueStates.crashed || status === MsQueue.QueueStates.error) {
         entry.attempts = entry.attempts + 1;
       }
 
@@ -104,17 +104,5 @@ export class QueueService implements IQueueService {
   }
   public async getAllJobs(): Promise<Array<IJobs>> {
     return await this.redisClient.getAll<IJobs>("ecq*");
-  }
-  public async getScheduledJobs(): Promise<Array<IJobs>> {
-    return [];
-  }
-  public async getProcessingJobs(): Promise<Array<IJobs>> {
-    return [];
-  }
-  public async getCrashedJobs(): Promise<Array<IJobs>> {
-    return [];
-  }
-  public async getFinishedJobs(): Promise<Array<IJobs>> {
-    return [];
   }
 }
